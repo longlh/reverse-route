@@ -1,0 +1,27 @@
+{
+  "name": "reverse-route",
+  "version": "1.0.1",
+  "description": "ReverseRoute for Express",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/longlh/reverse-route"
+  },
+  "author": {
+    "name": "Luc Hoang Long",
+    "email": "d@dapps.me"
+  },
+  "keywords": [
+    "route",
+    "reverse",
+    "express",
+    "url",
+    "node"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longlh/reverse-route/issues"
+  },
+  "homepage": "https://github.com/longlh/reverse-route",
+  "dependencies": {}
+}
