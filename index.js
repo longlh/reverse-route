@@ -43,7 +43,7 @@ var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete' ],
 
 module.exports = function(app, factory) {
 	// inject enhanced method _route
-	app._route = function(path, routeName) {
+	app._route = function(routeName, path) {
 		// store routeName
 		if (routeName) {
 			routeTable[routeName] = path;
