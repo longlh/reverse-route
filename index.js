@@ -26,7 +26,7 @@ var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete' ],
 		}
 
 		if (Object.keys(query).length > 0) {
-			path += '?' + querystring.stringify(query);
+			path += '?' + qs.stringify(query);
 		}
 
 		return path;
