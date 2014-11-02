@@ -29,14 +29,12 @@ app._get('user', /user/:id', function(req, res, next) {
 ```
 var app = require('express')();
 
-require('reserve-route')(app, function(path, build, req, res, next) {
-	return function(routeName, parameters) {
-		var pathPattern = path(routeName);
-
+require('reserve-route')(app, function(build, req, res, next) {
+	return function(alias, parameters) {
 		// add some parameters here
 		parameters.locale = i18n.getLocale(req);
 
-		return build(pathPattern, parameters);
+		return build(alias, parameters);
 	};
 });
 
@@ -47,4 +45,5 @@ require('reserve-route')(app, function(path, build, req, res, next) {
 Ex: Swig
 ```
 <a href="{{ _url('home') }}">To home</a>
+<a href="{{ _url('user', { id: 'me' }) }}"Profile</a>
 ```

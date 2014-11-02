@@ -1,6 +1,6 @@
 {
   "name": "reverse-route",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ReverseRoute for Express",
   "main": "index.js",
   "repository": {
