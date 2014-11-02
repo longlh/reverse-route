@@ -8,7 +8,7 @@ var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete' ],
 	aliases = {};
 
 var _build = function(alias, parameters) {
-		path = aliases(alias);
+		var path = aliases[alias];
 
 		if (path) {
 			parameters = parameters || {};
