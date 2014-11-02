@@ -83,4 +83,6 @@ module.exports = function(app, factory) {
 
 		next();
 	});
+
+	return app;
 };
