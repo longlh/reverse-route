@@ -29,11 +29,11 @@ app._route('user', '/user/:id').get(function(req, res, next) {
 ```
 #### Customize
 ```js
-reverseRoute(app, function(buildURL, req, res, next) {
+reverseRoute(app, function(_url, req, res, next) {
 	return function(alias, parameters) {
 		// add some parameters here
 		parameters.locale = i18n.getLocale(req);
-		return buildURL(alias, parameters);
+		return _url(alias, parameters);
 	};
 });
 ```
