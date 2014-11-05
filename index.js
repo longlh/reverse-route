@@ -7,7 +7,7 @@ var qs = require('querystring'),
 console.log('loaded...');
 
 // pre-values
-var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete', 'head', 'trace', 'options', 'connect' ],
+var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete', 'head', 'trace', 'options', 'connect', 'patch' ],
 	aliases = {},
 	sets = {};
 
