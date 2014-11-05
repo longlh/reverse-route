@@ -60,7 +60,7 @@ Support alias with defined parameter sets
 ```js
 app._route.add('static', {
    about: {
-	  id: 'about
+	  id: 'about'
    },
    term: {
 	  id: 'term'
