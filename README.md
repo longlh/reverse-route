@@ -103,7 +103,7 @@ function redirectToAboutPageInAnotherLanguage(req, res, next) {
 }
 ```
 ### Helper
-#### _url(alias, [name, params])
+#### _url(alias, [setname, params])
 Accept same arguments as `res._redirect()`. Use to generate URL in HTML template
 ```html
 <a href="{{ _url('home') }}">Home page</a> <!-- URL: / -->
