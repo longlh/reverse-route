@@ -9,62 +9,69 @@ var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete', 'head', 'trace', 'opt
 	aliases = {},
 	sets = {};
 
-var _build = function() {
-	var args = Array.prototype.slice.call(arguments),
-		alias, setName, params;
+module.exports = function(app, cb) {
+	var factory = function(req) {
+		return function() {
+			var args = Array.prototype.slice.call(arguments),
+			alias, setName, params;
 
-	if (args.length === 1) { // _build(alias)
-		alias = args.shift();
-	} else if (args.length === 2) { // _build(alias, setName) or _build(alias, params)
-		alias = args.shift();
+			if (args.length === 1) { // _build(alias)
+				alias = args.shift();
+			} else if (args.length === 2) { // _build(alias, setName) or _build(alias, params)
+				alias = args.shift();
 
-		var second = args.shift();
+				var second = args.shift();
 
-		if (typeof second === 'string') {
-			setName = second;
-		} else {
-			params = second;
-		}
-	} else if (args.length === 3) { // _build(alias, setName, params)
-		alias = args.shift();
-		setName = args.shift();
-		params = args.shift();
-	} else {
-		return;
-	}
-
-	if (setName) {
-		// get pre-defined parameters
-		params = _.chain(sets[alias] && sets[alias][setName] || {}).clone().assign(params).value();
-	}
-
-	var path = aliases[alias];
-
-	if (path !== undefined) {
-		params = params || {};
-		var query = {};
-
-		for (var name in params) {
-			var searchPattern = new RegExp('(:' + name + ')(\\(.*\\))?');
-
-			var match = path.match(searchPattern);
-
-			if (match) {
-				path = path.replace(searchPattern, params[name]);
+				if (typeof second === 'string') {
+					setName = second;
+				} else {
+					params = second;
+				}
+			} else if (args.length === 3) { // _build(alias, setName, params)
+				alias = args.shift();
+				setName = args.shift();
+				params = args.shift();
 			} else {
-				query[name] = params[name];
+				return;
 			}
+
+			if (setName) {
+				// get pre-defined parameters
+				params = _.chain(sets[alias] && sets[alias][setName] || {}).clone().assign(params).value();
+			}
+
+			params = params || {};
+
+			params = cb ? cb(params, req) : params;
+
+			var path = aliases[alias];
+
+			if (path !== undefined) {
+
+				var query = {};
+
+				for (var name in params) {
+					var searchPattern = new RegExp('(:' + name + ')(\\(.*\\))?');
+
+					var match = path.match(searchPattern);
+
+					if (match) {
+						path = path.replace(searchPattern, params[name]);
+					} else {
+						query[name] = params[name];
+					}
+				}
+
+				if (Object.keys(query).length > 0) {
+					path += '?' + qs.stringify(query);
+				}
+			}
+
+			return path;
 		}
+	};
 
-		if (Object.keys(query).length > 0) {
-			path += '?' + qs.stringify(query);
-		}
-	}
 
-	return path;
-};
-
-module.exports = function(app, factory) {
 	// ehhance app.route(path) -> app._route(alias, path)
 	app._route = function(alias, path) {
 		// store alias
@@ -108,14 +115,12 @@ module.exports = function(app, factory) {
 	});
 
 	app.use(function(req, res, next) {
-		var helper = factory ? factory(_build, req, res, next) : _build;
-
 		// add _url() helper
-		res.locals._url = req._url = helper;
+		res.locals._url = req._url = factory(req);
 
 		// add _redirect() helper
 		res._redirect = function() {
-			res.redirect(helper.apply(helper, arguments));
+			res.redirect(req._url.apply(req._url, arguments));
 		};
 
 		next();
