@@ -4,8 +4,6 @@
 var qs = require('querystring'),
 	_ = require('lodash');
 
-console.log('loaded...');
-
 // pre-values
 var supportedHttpVerbs = [ 'get', 'post', 'put', 'delete', 'head', 'trace', 'options', 'connect', 'patch' ],
 	aliases = {},
@@ -42,7 +40,7 @@ var _build = function() {
 
 	var path = aliases[alias];
 
-	if (path) {
+	if (path !== undefined) {
 		params = params || {};
 		var query = {};
 

@@ -30,8 +30,11 @@ app._route('user', '/user/:id').get(function(req, res, next) {
 #### Customize
 ```js
 reverseRoute(app, function(_url, req, res, next) {
+	// re-define _url function
 	return function(alias, parameters) {
-		// add some parameters here
+	    // write your own logic here
+		// eg: add `locale` parameter to every URL
+		parameters = parameters || {};
 		parameters.locale = i18n.getLocale(req);
 		return _url(alias, parameters);
 	};
@@ -79,24 +82,31 @@ app._route('static', '/page/:id').get(function(req, res, next) {
 
 #### app._route.remove(alias, setname)
 Remove a defined parameter sets
+```js
+app._route.remove('static', 'term');
+```
 ### Redirect
 #### res._redirect(alias, [setname, params])
 ```js
 function redirectToHomePage(req, res, next) {
+	// res._redirect(alias)
 	res._redirect('home');
 }
 
 function redirectToProfilePage(req, res, next) {
+	// res._redirect(alias, params)
 	res._redirect('user', {
 		id: 'me'
 	});
 }
 
 function redirectToAboutPage(req, res, next) {
+	// res._redirect(alias, setname)
 	res._redirect('static', 'about');
 }
 
 function redirectToAboutPageInAnotherLanguage(req, res, next) {
+	// res._redirect(alias, setname, params)
 	res._redirect('static', 'about', {
 		lang: 'vi'
 	});
@@ -114,4 +124,4 @@ Accept same arguments as `res._redirect()`. Use to generate URL in HTML template
 [npm-image]: https://img.shields.io/npm/v/reverse-route.svg?style=flat
 [npm-url]: https://www.npmjs.org/package/reverse-route
 [downloads-image]: https://img.shields.io/npm/dm/reverse-route.svg?style=flat
-[downloads-url]: https://npmjs.org/package/reverse-route
+[downloads-url]: https://www.npmjs.org/package/reverse-route
