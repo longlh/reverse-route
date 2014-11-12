@@ -35,7 +35,7 @@ var _build = function() {
 
 	if (setName) {
 		// get pre-defined parameters
-		params = _.assign(sets[alias] && sets[alias][setName] || {}, params);
+		params = _.chain(sets[alias] && sets[alias][setName] || {}).clone().assign(params).value();
 	}
 
 	var path = aliases[alias];
