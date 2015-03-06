@@ -2,6 +2,7 @@
 
 // module load
 var qs = require('querystring'),
+	url = require('url'),
 	_ = require('lodash');
 
 // pre-values
@@ -13,7 +14,7 @@ module.exports = function(app, cb) {
 	var factory = function(req) {
 		return function() {
 			var args = Array.prototype.slice.call(arguments),
-			alias, setName, params;
+				alias, setName, params;
 
 			if (args.length === 1) { // _build(alias)
 				alias = args.shift();
@@ -51,7 +52,7 @@ module.exports = function(app, cb) {
 				var query = {};
 
 				for (var name in params) {
-					var searchPattern = new RegExp('(:' + name + ')(\\(.*\\))?');
+					var searchPattern = new RegExp('(:' + name + ')(\\(.*\\))?(\\?{0,1})');
 
 					var match = path.match(searchPattern);
 
