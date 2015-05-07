@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/longlh/reverse-route",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./test"
+    "test": "./node_modules/.bin/grunt && \"./node_modules/.bin/mocha\" ./test"
   },
   "dependencies": {
     "lodash": "^3.8.0"

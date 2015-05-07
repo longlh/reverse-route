@@ -151,7 +151,7 @@ describe('ReverseRoute middleware', function() {
 		});
 
 		app._route.add('static', {
-		  	about: {
+			about: {
 				id: 'about'
 			}
 		});
@@ -181,7 +181,7 @@ describe('ReverseRoute middleware', function() {
 		});
 
 		app._route.add('static', {
-		  	about: {
+			about: {
 				id: 'about'
 			}
 		});
@@ -209,7 +209,7 @@ describe('ReverseRoute middleware', function() {
 		});
 
 		app._route.add('static', {
-		  	about: {
+			about: {
 				id: 'about'
 			}
 		});

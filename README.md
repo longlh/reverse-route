@@ -4,7 +4,9 @@ reverse-route
 ReverseRoute module for Express
 
 [![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM Downloads][downloads-image]][npm-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![Build Status][travis-image]][travis-url]
 
 ### Installation
 ```bash
@@ -57,12 +59,12 @@ app._get('home', '/', function(req, res, next) {
 Support alias with defined parameter sets
 ```js
 app._route.add('static', {
-   about: {
-	  id: 'about'
-   },
-   term: {
-	  id: 'term'
-   }
+	about: {
+		id: 'about'
+	},
+	term: {
+		id: 'term'
+	}
 });
 
 app._route('static', '/page/:id').get(function(req, res, next) {
@@ -116,7 +118,18 @@ Accept same arguments as `res._redirect()`. Use to generate URL in HTML template
 <a href="{{ _url('static', 'about') }}">About us</a> <!-- URL: /page/about  -->
 <a href="{{ _url('static', 'about', { lang: 'vi' }) }}">About us in Vietnamese</a> <!-- URL: /page/about?lang=vi -->
 ```
+## Tests
+	$ npm install
+	$ npm test
+
+## License
+
+[The MIT License](http://opensource.org/licenses/MIT)
+
 [npm-image]: https://img.shields.io/npm/v/reverse-route.svg?style=flat
 [npm-url]: https://www.npmjs.org/package/reverse-route
 [downloads-image]: https://img.shields.io/npm/dm/reverse-route.svg?style=flat
-[downloads-url]: https://www.npmjs.org/package/reverse-route
+[coveralls-image]: https://coveralls.io/repos/longlh/reverse-route/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/r/longlh/reverse-route?branch=master
+[travis-image]: https://travis-ci.org/longlh/reverse-route.svg
+[travis-url]: https://travis-ci.org/longlh/reverse-route
