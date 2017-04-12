@@ -23,7 +23,7 @@ describe('ReverseRoute monkey-patch', function() {
 		done();
 	});
 
-	it ('should create ._{{HTTP_VERB}}()', function(done) {
+	it('should create ._{{HTTP_VERB}}()', function(done) {
 		should.equal(typeof app._get, 'function');
 		should.equal(typeof app._post, 'function');
 		should.equal(typeof app._put, 'function');
